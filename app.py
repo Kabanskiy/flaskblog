@@ -6,18 +6,20 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 db = SQLAlchemy(app)
 
-class Baza(db):
-    id = db.Column(db.integer, primary_key = True)
-    title = db.Column(db.String(100), nullable = False)
-    intro = db.Column(db.String(250), nullable = False)
-    text = db.Column(db.Text, nullable = False)
-    date = db.Column(db.DateTime, default = datetime.utcnow)
+class Baza(db.Model):
+    id = db.Column(db.integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    intro = db.Column(db.String(250), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Baza %r>' %self.id
 
 @app.route('/')
 @app.route('/home')
 def index():
     return render_template('index.html')
-
 
 @app.route('/about') # здесь отслеживаем переход на страницу
 def about():
@@ -26,7 +28,6 @@ def about():
 @app.route('/user/<string:name>/<int:id>')
 def user(name, id):
     return 'User page: ' + name + '-' + str(id)
-
 
 
 
