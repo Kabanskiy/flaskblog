@@ -1,9 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Baza(db.Model):
@@ -27,9 +28,22 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/create_baza') # здесь отслеживаем переход на страницу
+@app.route('/create_baza', methods=['POST', 'GET'])
 def create_baza():
-    return render_template('create_baza.html')
+    if request.method == 'POST':
+        title = request.form['title']
+        intro = request.form['intro']
+        text = request.form['text']
+
+        baza = Baza(title=title, intro = intro, text = text)
+        try:
+            db.session.add(baza)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'При добавлении статьи произошла ошибка'
+    else:
+        return render_template('create_baza.html')
 
 
 if __name__ == '__main__':
