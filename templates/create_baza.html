@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container">
     <h1>Добавление чего-то</h1>
+    </div>
     <form method="post">
-        <input type="text" name="title" id="title" class="form-control" placeholder="Введи название"><br>
-        <textarea type="intro" name="intro" id="intro" class="form-control" placeholder="Введи что-то"></textarea><br>
-        <textarea type="text" name="text" id="text" class="form-control" placeholder="Введи текст основной"></textarea><br>
+        <input type="text" name="title" id="title" class="container form-control" placeholder="Введи название"><br>
+        <textarea type="intro" name="intro" id="intro" class="container form-control" placeholder="Введи что-то"></textarea><br>
+        <textarea type="text" name="text" id="text" class="container form-control" placeholder="Введи текст основной"></textarea><br>
+        <input type="submit" class="btn btn-susses" value="Отправить">
     </form>
 {% endblock %}
