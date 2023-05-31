@@ -33,6 +33,10 @@ def posts():
     bazes = Baza.query.order_by(Baza.date).all()
     return render_template('posts.html', bazes=bazes)
 
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+
 @app.route('/create_baza', methods=['POST', 'GET'])
 def create_baza():
     if request.method == 'POST':
