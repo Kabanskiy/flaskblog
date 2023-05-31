@@ -28,6 +28,11 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route('/posts')
+def posts():
+    bazes = Baza.query.order_by(Baza.date).all()
+    return render_template('posts.html', bazes=bazes)
+
 @app.route('/create_baza', methods=['POST', 'GET'])
 def create_baza():
     if request.method == 'POST':
