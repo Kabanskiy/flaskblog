@@ -7,7 +7,13 @@
 {% block body %}
     <div class="container">
         <h1>Всестатьи на ссайте</h1>
-
-        {{bazes[0].title}}
+        {% for i in bazes %}
+        <div class="alert alert-info">
+            <h2>{{ i.title }}</h2>
+            <p>{{ i.intro }}</p>
+            <p><b>Дата: {{ i.date.date() }}</b></p>
+            <button class="btn btn-warning">Детально</button>
+        </div>
+        {% endfor %}
     </div>
 {% endblock %}
