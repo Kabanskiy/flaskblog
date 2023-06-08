@@ -30,8 +30,13 @@ def about():
 
 @app.route('/posts')
 def posts():
-    bazes = Baza.query.order_by(Baza.date).all()
+    bazes = Baza.query.order_by(Baza.date.desc()).all()
     return render_template('posts.html', bazes=bazes)
+
+@app.route('/posts/<int:id>')
+def posts_detail(id):
+    baze = Baza.query.get(id)
+    return render_template('posts_detail.html', baze=baze)
 
 @app.route('/faq')
 def faq():
@@ -48,7 +53,7 @@ def create_baza():
         try:
             db.session.add(baza)
             db.session.commit()
-            return redirect('/')
+            return redirect('/posts')
         except:
             return 'При добавлении статьи произошла ошибка'
     else:
