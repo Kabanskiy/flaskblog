@@ -38,6 +38,16 @@ def posts_detail(id):
     baze = Baza.query.get(id)
     return render_template('posts_detail.html', baze=baze)
 
+@app.route('/posts/<int:id>/delete')
+def posts_detail(id):
+    baze = Baza.query.get_or_404(id)
+    try:
+        db.session.delete(baze)
+        db.session.commit()
+        return redirect('/pots')
+    except:
+        return "При удалении статьи произошла ошибка"
+
 @app.route('/faq')
 def faq():
     return render_template('faq.html')
