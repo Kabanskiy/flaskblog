@@ -35,16 +35,16 @@ def posts():
 
 @app.route('/posts/<int:id>')
 def posts_detail(id):
-    baze = Baza.query.get(id)
-    return render_template('posts_detail.html', baze=baze)
+    baza = Baza.query.get(id)
+    return render_template('posts_detail.html', baza=baza)
 
 @app.route('/posts/<int:id>/delete')
-def posts_detail(id):
-    baze = Baza.query.get_or_404(id)
+def posts_delete(id):
+    baza = Baza.query.get_or_404(id)
     try:
-        db.session.delete(baze)
+        db.session.delete(baza)
         db.session.commit()
-        return redirect('/pots')
+        return redirect('/posts')
     except:
         return "При удалении статьи произошла ошибка"
 
@@ -59,7 +59,7 @@ def create_baza():
         intro = request.form['intro']
         text = request.form['text']
 
-        baza = Baza(title=title, intro = intro, text = text)
+        baza = Baza(title=title, intro=intro, text=text)
         try:
             db.session.add(baza)
             db.session.commit()

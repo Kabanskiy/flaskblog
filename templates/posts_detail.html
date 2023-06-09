@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ baze.title }}
+{{ baza.title }}
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>{{ baze.title }}</h1>
+        <h1>{{ baza.title }}</h1>
         <div class="alert alert-info">
-            <p>{{ baze.info }}</p>
-            <p><b>Дата: {{ baze.date.date() }}</b></p>
-            <a href="/posts/{{ i.id }}/delete" class="btn btn-danger">Удалить</a>
-            <a href="/posts/{{ i.id }}/update" class="btn btn-danger">Изменить</a>
+            <p>{{ baza.info }}</p>
+            <p><b>Дата: {{ baza.date.date() }}</b></p>
+            <a href="/posts/{{ baza.id }}/delete" class="btn btn-danger">Удалить</a>
+            <a href="/posts/{{ baza.id }}/update" class="btn btn-success">Изменить</a>
         </div>
     </div>
 {% endblock %}
