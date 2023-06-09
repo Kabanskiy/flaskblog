@@ -48,6 +48,23 @@ def posts_delete(id):
     except:
         return "При удалении статьи произошла ошибка"
 
+@app.route('/posts/<int:id>/update', methods=['POST', 'GET'])
+def posts_update(id):
+    baza = Baza.query.get(id)
+    if request.method == 'POST':
+        baza.title = request.form['title']
+        baza.intro = request.form['intro']
+        baza.text = request.form['text']
+
+        try:
+            db.session.commit()
+            return redirect('/posts')
+        except:
+            return 'При добавлении статьи произошла ошибка'
+    else:
+        baza = Baza.query.get(id)
+        return render_template('posts_update.html', baza=baza)
+
 @app.route('/faq')
 def faq():
     return render_template('faq.html')

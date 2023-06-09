@@ -7,6 +7,7 @@
 {% block body %}
     <div class="container">
         <h1>Всестатьи на ссайте</h1>
+    {% if bazes|length > 0 %}
         {% for i in bazes %}
         <div class="alert alert-info">
             <h2>{{ i.title }}</h2>
@@ -15,5 +16,8 @@
             <a href="/posts/{{ i.id }}" class="btn btn-warning">Детально</a>
         </div>
         {% endfor %}
+    {% else %}
+    <p>Статьи еще пока не созданы</p>
+    {% endif %}
     </div>
 {% endblock %}
